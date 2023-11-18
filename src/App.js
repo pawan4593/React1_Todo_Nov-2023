@@ -8,7 +8,7 @@ function App() {
   
   return (
     <>
-      <Header/>
+      <Header title="Todos List" searchBar={true}/>
       <Todo/>
       <Footer/>
     </>

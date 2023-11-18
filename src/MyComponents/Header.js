@@ -1,11 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Header() {
+export default function Header(props) {
   return (
     <>
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">Todos List</a>
+        <a className="navbar-brand" href="#">{props.title}</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -18,13 +19,24 @@ export default function Header() {
               <a className="nav-link active" aria-current="page" href="#">About</a>
             </li>
           </ul>
-          <form className="d-flex" role="search">
+          {props.searchBar ? <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
             <button className="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          </form>:"Search bar not available"}
         </div>
       </div>
     </nav>
   </>
   )
+}
+
+//What if user did not send the values in the props
+Header.defaultProps = {
+  title : "This is default title" ,
+  searchBar : true
+}
+
+Header.propTypes = {
+  title : PropTypes.string,
+  searchBar : PropTypes.bool.isRequired //This prop becomes required . No effect if default value is present .
 }
