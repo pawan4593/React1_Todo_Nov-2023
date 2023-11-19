@@ -3,6 +3,7 @@ import './App.css';
 import Header from './MyComponents/Header';
 import {Todo} from './MyComponents/Todo';
 import {Footer} from './MyComponents/Footer';
+import {AddTodo} from './MyComponents/AddTodo';
 import React , {useState} from 'react' ;
 
 
@@ -17,6 +18,26 @@ function App() {
       return todoitem !== e ;
     }))
   }
+
+  const addTodo = (title , desc)=>{
+    // console.log("Adding todo" , title , " " , desc) ;
+    let sno ;
+    
+    //What if todos are empty
+    if(todos.length == 0){
+      sno = 1 ;
+    }else{
+     sno = todos[todos.length - 1].sno ;
+    }
+
+    const myTodo = {
+      sno : "",
+      title : title ,
+      desc : desc 
+    }
+    setTodos([...todos , myTodo]) ;
+  }
+
   const [todos , setTodos]= useState([
     {
       sno : 1 ,
@@ -37,6 +58,7 @@ function App() {
   return (
     <>
       <Header title="Todos List" searchBar={true}/>
+      <AddTodo addTodo={addTodo}/>
       <Todo todos={todos} onDelete={onDelete}/>
       <Footer/>
     </>
